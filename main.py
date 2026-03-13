@@ -30,12 +30,12 @@ app = FastAPI()
 @app.post(WEBHOOK_PATH)
 async def telegram_webhook(req: Request):
     update = await req.json()
-    print(update)  # handle updates here
+    print(update)  # handle the update here
     return {"ok": True}
 
-# Set webhook on startup
+# optional: set webhook on start
 def set_webhook():
-    url = os.getenv("RAILWAY_STATIC_URL") + WEBHOOK_PATH  # Railway gives you this
+    url = os.getenv("RAILWAY_STATIC_URL") + WEBHOOK_PATH
     requests.get(f"https://api.telegram.org/bot{TOKEN}/setWebhook?url={url}")
     
 async def main():
@@ -43,6 +43,7 @@ async def main():
 
 if __name__ == "__main__":
     set_webhook()
+    import uvicorn
     port = int(os.getenv("PORT", 8000))
     uvicorn.run(app, host="0.0.0.0", port=port)
     asyncio.run(main())
