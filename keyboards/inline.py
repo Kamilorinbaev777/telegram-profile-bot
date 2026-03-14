@@ -77,7 +77,8 @@ profile_kb2 = InlineKeyboardMarkup(
             )],
         [InlineKeyboardButton(
             text="Delete Profile",
-            callback_data='del_profile'
+            callback_data='del_profile',
+            style="danger"
             )]
         ]
     )
